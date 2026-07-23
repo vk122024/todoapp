@@ -1,0 +1,14 @@
+C:\Users\lsprog\github\grapl\bin\Debug\net8.0\grapl.exe
+C:\Users\lsprog\github\grapl\bin\Debug\net8.0\grapl.deps.json
+C:\Users\lsprog\github\grapl\bin\Debug\net8.0\grapl.runtimeconfig.json
+C:\Users\lsprog\github\grapl\bin\Debug\net8.0\grapl.dll
+C:\Users\lsprog\github\grapl\bin\Debug\net8.0\grapl.pdb
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.AssemblyInfoInputs.cache
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.AssemblyInfo.cs
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.csproj.CoreCompileInputs.cache
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.dll
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\refint\grapl.dll
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.pdb
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.genruntimeconfig.cache
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\ref\grapl.dll
