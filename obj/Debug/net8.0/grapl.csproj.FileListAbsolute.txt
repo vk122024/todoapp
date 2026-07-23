@@ -12,3 +12,4 @@ C:\Users\lsprog\github\grapl\obj\Debug\net8.0\refint\grapl.dll
 C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.pdb
 C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.genruntimeconfig.cache
 C:\Users\lsprog\github\grapl\obj\Debug\net8.0\ref\grapl.dll
+C:\Users\lsprog\github\grapl\obj\Debug\net8.0\grapl.sourcelink.json

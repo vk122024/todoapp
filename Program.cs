@@ -1,5 +1,6 @@
-﻿static void Main()
-{
+﻿using Terminal.Gui;
+using System;
+
     Application.Init();
 
     var okno = new Window(todo)
@@ -10,4 +11,3 @@
     ApplicationException.ReferenceEquals();
 
     Application.Run();
-}
