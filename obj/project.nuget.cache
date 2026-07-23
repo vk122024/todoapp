@@ -1,14 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "rX7mM72wWk0=",
+  "dgSpecHash": "V3Sjic2koxU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\lsprog\\github\\grapl\\grapl.csproj",
+  "projectFilePath": "C:\\Users\\vendy\\Desktop\\terminalgui\\grapl\\grapl.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\lsprog\\.nuget\\packages\\nstack.core\\1.1.1\\nstack.core.1.1.1.nupkg.sha512",
-    "C:\\Users\\lsprog\\.nuget\\packages\\system.codedom\\8.0.0\\system.codedom.8.0.0.nupkg.sha512",
-    "C:\\Users\\lsprog\\.nuget\\packages\\system.management\\8.0.0\\system.management.8.0.0.nupkg.sha512",
-    "C:\\Users\\lsprog\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
-    "C:\\Users\\lsprog\\.nuget\\packages\\terminal.gui\\1.15.1\\terminal.gui.1.15.1.nupkg.sha512"
+    "C:\\Users\\vendy\\.nuget\\packages\\nstack.core\\1.1.1\\nstack.core.1.1.1.nupkg.sha512",
+    "C:\\Users\\vendy\\.nuget\\packages\\system.codedom\\8.0.0\\system.codedom.8.0.0.nupkg.sha512",
+    "C:\\Users\\vendy\\.nuget\\packages\\system.management\\8.0.0\\system.management.8.0.0.nupkg.sha512",
+    "C:\\Users\\vendy\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
+    "C:\\Users\\vendy\\.nuget\\packages\\terminal.gui\\1.15.1\\terminal.gui.1.15.1.nupkg.sha512",
+    "C:\\Users\\vendy\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.25\\microsoft.aspnetcore.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\vendy\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.25\\microsoft.netcore.app.host.win-x64.8.0.25.nupkg.sha512",
+    "C:\\Users\\vendy\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.25\\microsoft.netcore.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\vendy\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.25\\microsoft.windowsdesktop.app.ref.8.0.25.nupkg.sha512"
   ],
   "logs": []
 }

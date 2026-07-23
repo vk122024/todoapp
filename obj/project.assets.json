@@ -250,19 +250,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lsprog\\.nuget\\packages\\": {}
+    "C:\\Users\\vendy\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lsprog\\github\\grapl\\grapl.csproj",
+      "projectUniqueName": "C:\\Users\\vendy\\Desktop\\terminalgui\\grapl\\grapl.csproj",
       "projectName": "grapl",
-      "projectPath": "C:\\Users\\lsprog\\github\\grapl\\grapl.csproj",
-      "packagesPath": "C:\\Users\\lsprog\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lsprog\\github\\grapl\\obj\\",
+      "projectPath": "C:\\Users\\vendy\\Desktop\\terminalgui\\grapl\\grapl.csproj",
+      "packagesPath": "C:\\Users\\vendy\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vendy\\Desktop\\terminalgui\\grapl\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lsprog\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\vendy\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -285,7 +285,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -307,12 +308,30 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.25, 8.0.25]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.25, 8.0.25]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.25, 8.0.25]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.25, 8.0.25]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\lsprog\\dotnet\\sdk\\8.0.423/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
