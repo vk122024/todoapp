@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vendy\\Desktop\\terminalgui\\grapl\\grapl.csproj": {}
+    "/home/student/todoapp/todoapp/grapl.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vendy\\Desktop\\terminalgui\\grapl\\grapl.csproj": {
+    "/home/student/todoapp/todoapp/grapl.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vendy\\Desktop\\terminalgui\\grapl\\grapl.csproj",
+        "projectUniqueName": "/home/student/todoapp/todoapp/grapl.csproj",
         "projectName": "grapl",
-        "projectPath": "C:\\Users\\vendy\\Desktop\\terminalgui\\grapl\\grapl.csproj",
-        "packagesPath": "C:\\Users\\vendy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vendy\\Desktop\\terminalgui\\grapl\\obj\\",
+        "projectPath": "/home/student/todoapp/todoapp/grapl.csproj",
+        "packagesPath": "/home/student/.nuget/packages/",
+        "outputPath": "/home/student/todoapp/todoapp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vendy\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/student/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net6.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -32,21 +32,15 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.200"
+        }
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Terminal.Gui": {
               "target": "Package",
-              "version": "[1.15.1, )"
+              "version": "[1.17.1, )"
             }
           },
           "imports": [
@@ -63,19 +57,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.25, 8.0.25]"
+              "version": "[6.0.8, 6.0.8]"
             },
             {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[8.0.25, 8.0.25]"
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[6.0.8, 6.0.8]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.25, 8.0.25]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.25, 8.0.25]"
+              "version": "[6.0.8, 6.0.8]"
             }
           ],
           "frameworkReferences": {
@@ -83,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
         }
       }
     }
