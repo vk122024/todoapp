@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Terminal.Gui;
+using Terminal.Gui; // Import knihoven pro systém, kolekce, soubory a rozhraní
 
 namespace SpravceUkolu
 {
@@ -9,23 +9,34 @@ namespace SpravceUkolu
     {
         static void Main(string[] args)
         {
-            // Inicializace Terminal.Gui
+            // Inicializace grafického prostředí v terminálu
             Application.Init();
 
-            // Cesta k souboru a seznam v paměti
+            // Názvy souborů pro ukládání dat
             string cestaKeSouboru = "ukoly.txt";
-            var seznamUkolu = new List<string>();
+            string cestaKHistorii = "historie.txt";
 
-            // Načtení uložených úkolů
+            // Seznamy v paměti pro aktivní a splněné úkoly
+            var seznamUkolu = new List<string>();
+            var historieUkolu = new List<string>();
+
+            // Načtení aktivních úkolů ze souboru, pokud soubor existuje
             if (File.Exists(cestaKeSouboru))
             {
                 seznamUkolu.AddRange(File.ReadAllLines(cestaKeSouboru));
             }
 
-            // Metoda pro zápis do souboru
-            Action uloz = () => File.WriteAllLines(cestaKeSouboru, seznamUkolu);
+            // Načtení splněných úkolů z historie
+            if (File.Exists(cestaKHistorii))
+            {
+                historieUkolu.AddRange(File.ReadAllLines(cestaKHistorii));
+            }
 
-            // Černé barevné schéma
+            // Funkce pro zápis seznamů do souborů
+            Action ulozUkoly = () => File.WriteAllLines(cestaKeSouboru, seznamUkolu);
+            Action ulozHistorii = () => File.WriteAllLines(cestaKHistorii, historieUkolu);
+
+            // Nastavení černého pozadí pro hlavní prvky
             var cernePozadiSchema = new ColorScheme() 
             { 
                 Normal = Terminal.Gui.Attribute.Make(Color.White, Color.Black), 
@@ -34,7 +45,7 @@ namespace SpravceUkolu
                 HotFocus = Terminal.Gui.Attribute.Make(Color.Black, Color.White) 
             }; 
 
-            // Modré barevné schéma
+            // Nastavení modrého pozadí pro zadávací řádek
             var modryRadekSchema = new ColorScheme() 
             { 
                 Normal = Terminal.Gui.Attribute.Make(Color.White, Color.Blue), 
@@ -43,24 +54,43 @@ namespace SpravceUkolu
                 HotFocus = Terminal.Gui.Attribute.Make(Color.BrightYellow, Color.Blue) 
             }; 
 
-            // Hlavní plocha bez okrajů a rámečků
-            var hlavniPohled = new View("TaskRun") 
+            // Horní menu lišta (otevírá se klávesou F10)
+            var menu = new MenuBar(new MenuBarItem[] {
+                new MenuBarItem ("_Historie", new MenuItem [] {
+                    new MenuItem ("_Zobrazit splněné úkoly", "", () => {
+                        // Vyskakovací dialog pro zobrazení historie
+                        var dialogHistorie = new Dialog("Historie splněných úkolů", 70, 15) { ColorScheme = cernePozadiSchema };
+                        
+                        // Komponenta pro seznam splněných úkolů
+                        var seznamView = new ListView(historieUkolu) { X = 1, Y = 1, Width = Dim.Fill() - 2, Height = Dim.Fill() - 3, ColorScheme = cernePozadiSchema };
+                        
+                        // Tlačítko pro zavření okna historie
+                        var btnZavrit = new Button("Zavřít") { X = Pos.Center(), Y = Pos.AnchorEnd(1), ColorScheme = cernePozadiSchema };
+                        btnZavrit.Clicked += () => Application.RequestStop(); // Zavře dialog
+                        
+                        dialogHistorie.Add(seznamView, btnZavrit);
+                        Application.Run(dialogHistorie); // Spustí dialog
+                    })
+                })
+            }) { ColorScheme = cernePozadiSchema };
+
+            // Hlavní kontejner aplikace pod menu
+            var hlavniPohled = new View() 
             { 
-                X = 0, Y = 0, 
-                Width = Dim.Fill(), Height = Dim.Fill(), 
+                X = 0, Y = 1, 
+                Width = Dim.Fill(), Height = Dim.Fill() - 1, 
                 ColorScheme = cernePozadiSchema 
             }; 
 
-            // Modře podbarvený řádek pro psaní
+            // Modrý pruh pro zadávání úkolu
             var psaciRadek = new View()
             {
-                X = 0, Y = 1,
-                Width = Dim.Fill(),
-                Height = 1,
+                X = 0, Y = 0,
+                Width = Dim.Fill(), Height = 1,
                 ColorScheme = modryRadekSchema
             };
 
-            // Vstupní pole a popisky
+            // Vstupní pole a textové popisy
             var popisekUkol = new Label("Úkol:") { X = 1, Y = 0, ColorScheme = modryRadekSchema }; 
             var vstupUkol = new TextField("") { X = 7, Y = 0, Width = 25, ColorScheme = modryRadekSchema }; 
 
@@ -70,101 +100,118 @@ namespace SpravceUkolu
             var popisekKdy = new Label("Do kdy:") { X = Pos.Right(vstupKdo) + 2, Y = 0, ColorScheme = modryRadekSchema }; 
             var vstupKdy = new TextField("") { X = Pos.Right(popisekKdy) + 1, Y = 0, Width = 15, ColorScheme = modryRadekSchema }; 
 
-            // Tlačítko pro přidání
+            // Tlačítko pro uložení nového úkolu
             var tlacitkoPridat = new Button("Přidat") { X = Pos.Right(vstupKdy) + 2, Y = 0, ColorScheme = modryRadekSchema }; 
 
-            // Vložení prvků do psacího řádku
+            // Vložení prvků do modrého řádku
             psaciRadek.Add(popisekUkol, vstupUkol, popisekKdo, vstupKdo, popisekKdy, vstupKdy, tlacitkoPridat);
 
-            // Container pro zobrazení úkolů
+            // Container pro zobrazení seznamu aktivních úkolů
             var kontejnerUkoly = new View() 
             { 
-                X = 1, Y = 3, 
+                X = 1, Y = 2, 
                 Width = Dim.Fill() - 2, Height = Dim.Fill() - 2, 
                 ColorScheme = cernePozadiSchema 
             }; 
 
-            // Tlačítko ukončení
+            // Tlačítko pro ukončení celého programu
             var tlacitkoKonec = new Button("Ukončit") 
             { 
                 X = Pos.AnchorEnd(11), Y = Pos.AnchorEnd(1), 
                 ColorScheme = cernePozadiSchema 
             }; 
 
-            // Popisek nápovědy
-            var napoveda = new Label("[Tab] Přepínání | [Enter] Přidat / Upravit úkol = klik") 
+            // Popisek s nápovědou a počítadlem dole
+            var napoveda = new Label("") 
             { 
                 X = 1, Y = Pos.AnchorEnd(1), 
                 ColorScheme = cernePozadiSchema 
             }; 
 
-            // Vykreslení seznamu úkolů
+            // Funkce pro aktualizaci spodního textu a počtu splněných úkolů
+            Action aktualizujNapovedu = () => {
+                napoveda.Text = $"[F10] Menu | [Tab] Přepínání | [Enter] Upravit | Splněno: {historieUkolu.Count}";
+            };
+
+            // Funkce pro prekreslení seznamu úkolů na obrazovce
             Action prekresliUkoly = null!; 
 
             prekresliUkoly = () => 
             { 
-                // Vyčištění starých položek
-                kontejnerUkoly.RemoveAll(); 
+                kontejnerUkoly.RemoveAll(); // Smaže staré vykreslené prvky
+                aktualizujNapovedu(); // Obnoví počítadlo
 
-                // Cyklus pro vykreslení každého úkolu
+                // Projde všechny úkoly a vytvoří pro ně řádek
                 for (int i = 0; i < seznamUkolu.Count; i++) 
                 { 
                     int aktualniIndex = i; 
                     string textUkolu = seznamUkolu[i]; 
 
-                    // Vytvoření textového řádku úkolu
+                    // Vytvoření řádku úkolu
                     var polozka = new Label($" - {textUkolu}") 
                     { 
                         X = 0, Y = i, 
                         Width = Dim.Fill(), 
                         ColorScheme = cernePozadiSchema, 
-                        CanFocus = true 
+                        CanFocus = true // Umožní vybrání klávesnicí
                     }; 
 
-                    // Dialog pro úpravu a smazání
+                    // Funkce pro otevření možností úkolu
                     Action akcePolozky = () => 
                     { 
-                        var dialog = new Dialog("Úprava úkolu", 60, 8) { ColorScheme = cernePozadiSchema }; 
+                        // Okno s možnostmi
+                        var dialog = new Dialog("Možnosti úkolu", 65, 8) { ColorScheme = cernePozadiSchema }; 
                         var labelInfo = new Label("Upravit záznam:") { X = 2, Y = 1, ColorScheme = cernePozadiSchema }; 
                         var editPole = new TextField(textUkolu) { X = 2, Y = 2, Width = Dim.Fill() - 4, ColorScheme = modryRadekSchema }; 
 
-                        // Tlačítko pro uložení změn
-                        var btnUpravit = new Button("Uložit") { X = 2, Y = 4, ColorScheme = cernePozadiSchema }; 
+                        // Tlačítko pro přesun úkolu do splněných
+                        var btnSplneno = new Button("✓ Splněno") { X = 2, Y = 4, ColorScheme = cernePozadiSchema };
+                        btnSplneno.Clicked += () =>
+                        {
+                            // Uložení do historie s časem splnění
+                            historieUkolu.Add($"{textUkolu} (Splněno: {DateTime.Now:dd.MM.yyyy HH:mm})");
+                            seznamUkolu.RemoveAt(aktualniIndex); // Odstranění z aktivních
+                            
+                            ulozUkoly(); // Zápis na disk
+                            ulozHistorii();
+                            prekresliUkoly(); // Obnovení obrazovky
+                            Application.RequestStop(); // Zavření dialogu
+                        };
+
+                        // Tlačítko pro uložení úprav
+                        var btnUpravit = new Button("Uložit") { X = Pos.Right(btnSplneno) + 2, Y = 4, ColorScheme = cernePozadiSchema }; 
                         btnUpravit.Clicked += () => 
                         { 
                             string novyText = (editPole.Text?.ToString() ?? "").Trim(); 
                             if (!string.IsNullOrEmpty(novyText)) 
                             { 
                                 seznamUkolu[aktualniIndex] = novyText; 
-                                uloz(); 
+                                ulozUkoly(); 
                                 prekresliUkoly(); 
                             } 
                             Application.RequestStop(); 
                         }; 
 
-                        // Tlačítko pro smazání
+                        // Tlačítko pro smazání úkolu bez splnění
                         var btnSmazat = new Button("Smazat") { X = Pos.Right(btnUpravit) + 2, Y = 4, ColorScheme = cernePozadiSchema }; 
                         btnSmazat.Clicked += () => 
                         { 
                             seznamUkolu.RemoveAt(aktualniIndex); 
-                            uloz(); 
+                            ulozUkoly(); 
                             prekresliUkoly(); 
                             Application.RequestStop(); 
                         }; 
 
-                        // Tlačítko pro zrušení
+                        // Tlačítko Storno
                         var btnZrusit = new Button("Zrušit") { X = Pos.Right(btnSmazat) + 2, Y = 4, ColorScheme = cernePozadiSchema }; 
                         btnZrusit.Clicked += () => Application.RequestStop(); 
 
-                        // Zobrazení dialogu
-                        dialog.Add(labelInfo, editPole, btnUpravit, btnSmazat, btnZrusit); 
+                        dialog.Add(labelInfo, editPole, btnSplneno, btnUpravit, btnSmazat, btnZrusit); 
                         Application.Run(dialog); 
                     }; 
 
-                    // Reakce na kliknutí myší
+                    // Nastavení reakce na myš i Enter
                     polozka.MouseClick += (m) => akcePolozky(); 
-                    
-                    // Reakce na klávesu Enter
                     polozka.KeyDown += (k) => 
                     { 
                         if (k.KeyEvent.Key == Key.Enter) 
@@ -178,38 +225,38 @@ namespace SpravceUkolu
                 } 
             }; 
 
-            // Logika pro přidání nového úkolu
+            // Funkce pro přidání nového úkolu ze zadaných textů
             Action pridatUkolAkce = () => 
             { 
                 string textCo = (vstupUkol.Text?.ToString() ?? "").Trim(); 
                 string textKdo = (vstupKdo.Text?.ToString() ?? "").Trim(); 
                 string textKdy = (vstupKdy.Text?.ToString() ?? "").Trim(); 
 
-                // Složení textu a uložení
                 if (!string.IsNullOrEmpty(textCo)) 
                 { 
+                    // Složení řetězce
                     string kompletniUkol = textCo; 
                     if (!string.IsNullOrEmpty(textKdo)) kompletniUkol += $" | Řeší: {textKdo}"; 
                     if (!string.IsNullOrEmpty(textKdy)) kompletniUkol += $" | Do: {textKdy}"; 
 
-                    seznamUkolu.Add(kompletniUkol); 
+                    seznamUkolu.Add(kompletniUkol); // Přidání do seznamu
                     
-                    // Pročištění políček
+                    // Vyčištění textových polí
                     vstupUkol.Text = ""; 
                     vstupKdo.Text = ""; 
                     vstupKdy.Text = ""; 
 
-                    uloz(); 
-                    prekresliUkoly(); 
+                    ulozUkoly(); // Zápis do souboru
+                    prekresliUkoly(); // Aktualizace zobrazení
                 } 
                 
-                vstupUkol.SetFocus(); 
+                vstupUkol.SetFocus(); // Vracení kurzoru na první pole
             }; 
 
-            // Kliknutí na Přidat
+            // Kliknutí na tlačítko Přidat
             tlacitkoPridat.Clicked += () => pridatUkolAkce(); 
 
-            // Skok z 1. do 2. pole přes Enter
+            // Přechod klávesou Enter z 1. pole do 2. pole
             vstupUkol.KeyDown += (args) => 
             { 
                 if (args.KeyEvent.Key == Key.Enter) 
@@ -219,7 +266,7 @@ namespace SpravceUkolu
                 } 
             }; 
 
-            // Skok z 2. do 3. pole přes Enter
+            // Přechod klávesou Enter z 2. pole do 3. pole
             vstupKdo.KeyDown += (args) => 
             { 
                 if (args.KeyEvent.Key == Key.Enter) 
@@ -229,7 +276,7 @@ namespace SpravceUkolu
                 } 
             }; 
 
-            // Potvrzení a přidání z 3. pole přes Enter
+            // Potvrzení a uložení z 3. pole stiskem Enter
             vstupKdy.KeyDown += (args) => 
             { 
                 if (args.KeyEvent.Key == Key.Enter) 
@@ -239,10 +286,10 @@ namespace SpravceUkolu
                 } 
             }; 
 
-            // Akce tlačítka Ukončit
+            // Akce ukončení po kliknutí na tlačítko Ukončit
             tlacitkoKonec.Clicked += () => Application.RequestStop(); 
 
-            // Sestavení hlavní plochy
+            // Složení prvků do hlavního pohledu
             hlavniPohled.Add(
                 psaciRadek, 
                 kontejnerUkoly, 
@@ -250,13 +297,14 @@ namespace SpravceUkolu
                 napoveda
             ); 
 
-            // Přidání na obrazovku
-            Application.Top.Add(hlavniPohled); 
+            // Přidání menu a pohledu do aplikace
+            Application.Top.Add(menu, hlavniPohled); 
 
-            // První vykreslení a start
+            // První spuštění vykreslení a nastavení kurzoru
             prekresliUkoly(); 
             vstupUkol.SetFocus(); 
 
+            // Spuštění grafického cyklu a následný úklid
             Application.Run(); 
             Application.Shutdown(); 
         } 
