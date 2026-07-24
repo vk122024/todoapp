@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("grapl")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+258453695316d988d5e6183d2994043530ea00e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17349f620fcab22d4d2e756a42bc39a5dbab2956")]
 [assembly: System.Reflection.AssemblyProductAttribute("grapl")]
 [assembly: System.Reflection.AssemblyTitleAttribute("grapl")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
