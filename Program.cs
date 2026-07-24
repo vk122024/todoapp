@@ -44,7 +44,7 @@ namespace SpravceUkolu
             }; 
 
             // Hlavní plocha bez okrajů a rámečků
-            var hlavniPohled = new View() 
+            var hlavniPohled = new View("TaskRun") 
             { 
                 X = 0, Y = 0, 
                 Width = Dim.Fill(), Height = Dim.Fill(), 
